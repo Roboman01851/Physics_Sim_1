@@ -1,4 +1,4 @@
-import pygame, pgzrun,  math, time, settings, vpython
+import pygame, pgzrun, math, time, settings
 
 
 pygame.init()
@@ -30,9 +30,19 @@ def startProgram():
             if event.type == pygame.QUIT:
                 running = False
 
+        vertices = [
+            [
+                (center_x + radius * math.cos(rotation + (2 * math.pi * i / vertex_count))),
+                (center_y + radius * math.sin(rotation + (2 * math.pi * i / vertex_count))),
+            ]
+            for i in range(vertex_count)
+        ]
 
+        pygame.draw.polygon(game_window, [255, 255, 255], )
 
         game_window.fill((0, 0, 0))
+
+
 
 
         pygame.display.flip()
