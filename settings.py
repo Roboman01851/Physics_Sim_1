@@ -1,6 +1,6 @@
 width = 1600
 height = 900
-title = "We Ballin ayyyy"
+title = "Physics go brrrr"
 size_of_font = 24
 
 shape_color = [255, 255, 255]
