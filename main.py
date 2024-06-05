@@ -42,12 +42,12 @@ def startProgram():
 
 def drawTangent():
 
-    xVect = [100, math.cos(50)]
-    yVect = [100, math.sin(0)]
+    xVect = [90, math.cos(0)]
+    yVect = [10, math.sin(90)]
     print(numpy.cross(xVect, yVect))
 
 
-    pygame.draw.line(game_window, [255, 255, 255], [500, 500], [500 + numpy.cross(xVect, yVect), 500 + numpy.cross(xVect, yVect)])
+    pygame.draw.line(game_window, [255, 255, 255], [500, 500], [500, 500])
 
 if __name__ == '__main__':
     startProgram()
