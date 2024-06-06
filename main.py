@@ -9,7 +9,7 @@ def startProgram():
     running = True
     center_x, center_y = settings.width // 2, settings.height // 2
     radius = 100
-
+    angle = 0
 
     shape_color = [0 , 255, 255]
     ground_color = [0, 255, 0]
@@ -33,21 +33,39 @@ def startProgram():
 
         pygame.draw.rect(game_window, ground_color, [(0, ground), (settings.width, settings.height)])
 
-        drawTangent()
+        if button_pressed[pygame.K_UP]:
+            angle += 0.1
+            time.sleep(0.2)
+        if button_pressed[pygame.K_DOWN]:
+            angle -= 0.1
+            time.sleep(0.2)
+
+        drawTangent(angle)
+
+
 
         pygame.display.flip()
 
     pygame.quit()
 
-
-def drawTangent():
-
-    xVect = [90, math.cos(0)]
-    yVect = [10, math.sin(90)]
-    print(numpy.cross(xVect, yVect))
+# v = 34m/s
+# theta = 40 deg
+# R = (V ** 2 sin 2 * theta)/g
+# H = (V ** 2 sin ^2 theta)/2g
 
 
-    pygame.draw.line(game_window, [255, 255, 255], [500, 500], [500, 500])
+def drawTangent(angle):
+    grav = 9.81
+    Vel = 34
+    H = ((Vel ** 2) * (math.sin(2 * angle))) / grav
+    R = ((Vel ** 2) * (math.sin(angle) ** 2)) / (2 * grav)
+
+    initPosX = 500
+    initPosY = 500
+
+    pygame.draw.line(game_window, [255, 255, 255], [initPosX, initPosY], [initPosX + R, initPosY + H])
+
+
 
 if __name__ == '__main__':
     startProgram()
