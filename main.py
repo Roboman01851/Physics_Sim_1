@@ -8,8 +8,9 @@ clock = pygame.time.Clock()
 def startProgram():
     running = True
     center_x, center_y = settings.width // 2, settings.height // 2
-    radius = 100
-    angle = 0
+    radius = 20
+    deg = 45
+    angle = math.radians(deg)
 
     shape_color = [0 , 255, 255]
     ground_color = [0, 255, 0]
@@ -17,6 +18,7 @@ def startProgram():
     ground = settings.height - 60
     startingPos = [center_x, center_y]
 
+    t = 0
 
     while running:
         #clock.tick(200)
@@ -25,23 +27,36 @@ def startProgram():
             if event.type == pygame.QUIT:
                 running = False
 
-        game_window.fill((0,0,0))
+        game_window.fill((0, 0, 0))
+        grav = 9.81
+        Vel = 100
+
+        R = ((Vel ** 2) * (math.sin(t / (2 * angle)))) / (grav)
+        H = ((Vel ** 2) * ((math.sin(t / (angle))) ** 2)) / (2 * grav)
+
+        yOffset = 0 - (0 + R)
+        xOffset = 0 - (0 + H)
+
+        x = (radius) - xOffset
+        y = (ground - radius) + yOffset
+
 
         button_pressed = pygame.key.get_pressed()
 
-        pygame.draw.circle(game_window, shape_color, [500, 500], 20)
+        pygame.draw.circle(game_window, shape_color, [x, y], radius)
 
         pygame.draw.rect(game_window, ground_color, [(0, ground), (settings.width, settings.height)])
 
-        if button_pressed[pygame.K_UP]:
-            angle += 0.1
-            time.sleep(0.2)
-        if button_pressed[pygame.K_DOWN]:
-            angle -= 0.1
-            time.sleep(0.2)
 
-        drawTangent(angle)
+        if button_pressed[pygame.K_SPACE]:
+            if t > 0 and yOffset > 0:
+                t = 0
+            if t >= 0:
+                t += 1 / 60
 
+
+            #print(f"x: {x}, y: {y}, t: {t}")
+            time.sleep(1 / 60)
 
 
         pygame.display.flip()
@@ -55,15 +70,12 @@ def startProgram():
 
 
 def drawTangent(angle):
-    grav = 9.81
-    Vel = 34
-    H = ((Vel ** 2) * (math.sin(2 * angle))) / grav
-    R = ((Vel ** 2) * (math.sin(angle) ** 2)) / (2 * grav)
+
 
     initPosX = 500
     initPosY = 500
 
-    pygame.draw.line(game_window, [255, 255, 255], [initPosX, initPosY], [initPosX + R, initPosY + H])
+    # pygame.draw.line(game_window, [255, 255, 255], [initPosX, initPosY], [initPosX + R, initPosY + H])
 
 
 
