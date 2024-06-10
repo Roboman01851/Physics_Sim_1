@@ -34,8 +34,8 @@ def startProgram():
         R = ((Vel ** 2) * (math.sin(t / (2 * angle)))) / (grav)
         H = ((Vel ** 2) * ((math.sin(t / (angle))) ** 2)) / (2 * grav)
 
-        yOffset = 0 - (0 + R)
-        xOffset = 0 - (0 + H)
+        yOffset = - R
+        xOffset = - H
 
         x = (radius) - xOffset
         y = (ground - radius) + yOffset
@@ -51,9 +51,11 @@ def startProgram():
         if button_pressed[pygame.K_SPACE]:
             if t > 0 and yOffset > 0:
                 t = 0
+            
             if t >= 0:
                 t += 1 / 60
 
+            print(R)
 
             #print(f"x: {x}, y: {y}, t: {t}")
             time.sleep(1 / 60)
