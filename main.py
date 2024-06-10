@@ -34,8 +34,8 @@ def startProgram():
         R = ((Vel ** 2) * (math.sin(t / (2 * angle)))) / (grav)
         H = ((Vel ** 2) * ((math.sin(t / (angle))) ** 2)) / (2 * grav)
 
-        yOffset = - R
-        xOffset = - H
+        yOffset = - H
+        xOffset = - R
 
         x = (radius) - xOffset
         y = (ground - radius) + yOffset
